@@ -1,0 +1,23 @@
+<job>
+<script language="JScript">
+  var fso = new ActiveXObject("Scripting.FileSystemObject");
+  var SCRIPT_CURRENT_DIR = fso.getParentFolderName(WScript.ScriptFullName);
+  var url = "https://raw.githubusercontent.com/javacommons/qiita/master/test/jws/Java-Edit.jar";
+  var fileName = SCRIPT_CURRENT_DIR + "\\Java-Edit.jar";
+  downloadFile(url, fileName);
+  var shell = new ActiveXObject("WScript.Shell");
+  shell.Run("javaw -jar Java-Edit.jar", 0, false);
+  WScript.Quit();
+  function downloadFile(url, fileName) {
+    var http = WScript.CreateObject("Msxml2.XMLHTTP");
+    var strm = WScript.CreateObject("Adodb.Stream");
+    var adTypeBinary = 1, adSaveCreateOverWrite = 2;
+    http.Open("GET", url, false);
+    http.Send();
+    strm.Type = adTypeBinary;
+    strm.Open();
+    strm.Write(http.responseBody);
+    strm.Savetofile(fileName, adSaveCreateOverWrite);
+  }
+</script>
+</job>
