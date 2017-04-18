@@ -4,11 +4,11 @@
   var SCRIPT_CURRENT_DIR = fso.getParentFolderName(WScript.ScriptFullName);
   var url = "https://raw.githubusercontent.com/javacommons/qiita/master/test/jws/Java-Edit.jar";
   var fileName = SCRIPT_CURRENT_DIR + "\\Java-Edit.jar";
-  try{
+  try {
     downloadFile(url, fileName);
-  }catch(e){
+  } catch (e) {
     WScript.Echo("JARファイルを更新できませんでした(すでに実行中?)。");
-  } 
+  }
   var shell = new ActiveXObject("WScript.Shell");
   shell.Run("javaw -jar Java-Edit.jar", 0, false);
   WScript.Quit();
